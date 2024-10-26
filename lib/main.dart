@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/src/splash/presentation/pages/splash.dart';
+import 'package:ecommerce_app/configs/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashPage(),
+      initialRoute: AppRoutes.splash,
+      onGenerateRoute: AppRoutes.generateRoute,
     );
   }
 }

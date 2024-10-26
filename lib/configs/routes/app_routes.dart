@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/src/splash/presentation/pages/splash.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -6,12 +7,12 @@ class AppRoutes {
   static const String login = '/login';
   static const String register = '/register';
   static const String forgotPassword = '/forgot-password';
-  Route<dynamic> generateRoute(RouteSettings settings) {
+  static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case home:
         return MaterialPageRoute(builder: (_) => const Placeholder());
       case splash:
-        return MaterialPageRoute(builder: (_) => const Placeholder());
+        return MaterialPageRoute(builder: (_) => const SplashPage());
       case login:
         return MaterialPageRoute(builder: (_) => const Placeholder());
       case register:

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/configs/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatelessWidget {
@@ -5,6 +6,12 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      backgroundColor: AppColors.secondary_100,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [],
+      ),
+    );
   }
 }
