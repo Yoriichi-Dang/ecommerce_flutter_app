@@ -6,12 +6,13 @@ class InputForm extends StatefulWidget {
   final String pathIcon;
   final String hintText;
   final bool isPassword;
-
+  final String validateText;
   const InputForm(
       {super.key,
       required this.pathIcon,
       required this.hintText,
-      this.isPassword = false});
+      this.isPassword = false,
+      required this.validateText});
 
   @override
   State<InputForm> createState() => _InputFormState();
@@ -31,6 +32,12 @@ class _InputFormState extends State<InputForm> {
           const SizedBox(width: 15),
           Expanded(
             child: TextFormField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return widget.validateText;
+                }
+                return null;
+              },
               cursorColor: AppColors.secondary_400,
               obscureText: widget.isPassword & !showPassword,
               decoration: InputDecoration(
