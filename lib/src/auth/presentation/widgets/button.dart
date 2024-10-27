@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/configs/themes/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Button extends StatelessWidget {
   final double width;
@@ -8,7 +9,7 @@ class Button extends StatelessWidget {
   final Color backgroundColor;
   final VoidCallback onPress;
   final double fontSize;
-  final Icon? icon;
+  final String? pathIcon;
   const Button(
       {super.key,
       required this.title,
@@ -17,7 +18,7 @@ class Button extends StatelessWidget {
       required this.onPress,
       this.fontSize = 17,
       this.width = 300,
-      this.icon});
+      this.pathIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +33,35 @@ class Button extends StatelessWidget {
           ),
         ),
         onPressed: onPress,
-        child: Text(
-          title,
-          style: TextStyle(
-            fontSize: fontSize,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Roboto',
-          ),
-        ),
+        child: pathIcon == null
+            ? Text(
+                title,
+                style: TextStyle(
+                  fontSize: fontSize,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Roboto',
+                ),
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    pathIcon!,
+                    width: 20,
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: fontSize,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Roboto',
+                    ),
+                  ),
+                ],
+              ),
       ),
     );
   }

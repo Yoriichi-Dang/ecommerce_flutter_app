@@ -2,11 +2,23 @@ import 'package:ecommerce_app/configs/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class InputForm extends StatelessWidget {
+class InputForm extends StatefulWidget {
   final String pathIcon;
   final String hintText;
-  const InputForm({super.key, required this.pathIcon, required this.hintText});
+  final bool isPassword;
 
+  const InputForm(
+      {super.key,
+      required this.pathIcon,
+      required this.hintText,
+      this.isPassword = false});
+
+  @override
+  State<InputForm> createState() => _InputFormState();
+}
+
+class _InputFormState extends State<InputForm> {
+  bool showPassword = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,13 +26,15 @@ class InputForm extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SvgPicture.asset(pathIcon, width: 20, color: Colors.grey.shade700),
+          SvgPicture.asset(widget.pathIcon,
+              width: 20, color: Colors.grey.shade700),
           const SizedBox(width: 15),
           Expanded(
             child: TextFormField(
               cursorColor: AppColors.secondary_400,
+              obscureText: widget.isPassword & !showPassword,
               decoration: InputDecoration(
-                hintText: hintText,
+                hintText: widget.hintText,
                 hintStyle: TextStyle(color: Colors.grey.shade700),
                 border: UnderlineInputBorder(),
                 enabledBorder: UnderlineInputBorder(
@@ -29,12 +43,27 @@ class InputForm extends StatelessWidget {
                     color: Colors.grey.shade300,
                   ),
                 ),
-                focusedBorder: UnderlineInputBorder(
+                focusedBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(
                     width: 2,
                     color: AppColors.secondary_400,
                   ),
                 ),
+                suffixIcon: widget.isPassword
+                    ? IconButton(
+                        onPressed: () {
+                          setState(() {
+                            showPassword = !showPassword;
+                          });
+                        },
+                        icon: Icon(
+                          showPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: AppColors.secondary_400,
+                        ),
+                      )
+                    : null,
               ),
             ),
           ),
