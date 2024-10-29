@@ -39,6 +39,7 @@ dependencies:
   equatable: ^2.0.5
   get_it: ^8.0.1
   flutter_bloc: ^8.1.6
+  carousel_slider: ^5.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,6 +68,7 @@ flutter:
     - assets/images/logo_1.png
     - assets/icons/email_icon.svg
     - assets/icons/lock_icon.svg
+    - assets/icons/google_icon.svg
     - assets/icons/user_icon.svg
     - assets/icons/phone_icon.svg
     - assets/icons/eye_icon.svg
@@ -79,6 +81,16 @@ flutter:
     - assets/icons/ship_car_icon.svg
     - assets/icons/setting_icon.svg
     - assets/icons/locate_icon.svg
+    - assets/icons/book_icon.svg
+    - assets/icons/cosmetic_icon.svg
+    - assets/icons/furniture_icon.svg
+    - assets/icons/jewelry_icon.svg
+    - assets/icons/shirt_icon.svg
+    - assets/icons/tech_icon.svg
+    - assets/icons/stationery_icon.svg
+    - assets/images/banner.jpg
+    - assets/images/banner_1.jpg
+    - assets/images/banner_2.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

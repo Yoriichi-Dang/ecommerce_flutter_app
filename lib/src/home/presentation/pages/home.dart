@@ -1,62 +1,68 @@
-import 'package:ecommerce_app/configs/themes/app_colors.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce_app/src/home/presentation/widgets/carousel_item.dart';
+import 'package:ecommerce_app/src/home/presentation/widgets/category.dart';
+import 'package:ecommerce_app/src/home/presentation/widgets/flash_sale.dart';
+import 'package:ecommerce_app/src/home/presentation/widgets/header.dart';
+import 'package:ecommerce_app/src/home/presentation/widgets/search_navbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        height: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    const List<String> images = [
+      'assets/images/banner_2.jpg',
+      'assets/images/banner_2.jpg',
+    ];
+
+    return Container(
+      height: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 15,
+          ),
+          Header(
+            location: 'San Francisco, CA',
+            numberNotification: 100,
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          SearchNavBar(),
+          const SizedBox(
+            height: 20,
+          ),
+          SingleChildScrollView(
+            child: Column(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Location',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey.shade600),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/icons/locate_icon.svg',
-                          width: 25,
-                          color: AppColors.brown_300,
-                        ),
-                        Text(
-                          'Danang city, Vietnam',
-                          style: TextStyle(color: AppColors.brown_300),
-                        )
-                      ],
-                    )
-                  ],
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: 200.0,
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    viewportFraction: 1.0,
+                    aspectRatio: 2.0,
+                  ),
+                  items: images.map((item) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return CarouselItem(pathImage: item);
+                      },
+                    );
+                  }).toList(),
                 ),
-                IconButton(
-                  icon: Badge.count(
-                      count: 9,
-                      child: SvgPicture.asset(
-                        'assets/icons/notification_icon.svg',
-                        color: AppColors.brown_300,
-                        width: 30,
-                      )),
-                  onPressed: () {},
+                const SizedBox(
+                  height: 20,
                 ),
+                Category(),
+                FlashSale(hours: 1, minutes: 50, seconds: 0),
               ],
-            )
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }

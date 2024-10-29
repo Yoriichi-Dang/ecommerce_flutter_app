@@ -10,15 +10,16 @@ class Button extends StatelessWidget {
   final VoidCallback onPress;
   final double fontSize;
   final String? pathIcon;
-  const Button(
-      {super.key,
-      required this.title,
-      this.padding = 17.0,
-      this.backgroundColor = AppColors.secondary_300,
-      required this.onPress,
-      this.fontSize = 17,
-      this.width = 300,
-      this.pathIcon});
+  const Button({
+    super.key,
+    required this.title,
+    this.padding = 17.0,
+    this.backgroundColor = AppColors.brown_300,
+    required this.onPress,
+    this.fontSize = 17,
+    this.width = 300,
+    this.pathIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
