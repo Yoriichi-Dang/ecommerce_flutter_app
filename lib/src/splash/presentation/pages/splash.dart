@@ -25,7 +25,7 @@ class _SplashPageState extends State<SplashPage> {
       });
     }
     // Hành động khi đếm ngược kết thúc
-    Navigator.pushReplacementNamed(context, '/introduct');
+    Navigator.pushReplacementNamed(context, '/root');
   }
 
   @override
@@ -34,7 +34,7 @@ class _SplashPageState extends State<SplashPage> {
       backgroundColor: AppColors.secondary_100,
       body: Center(
         child: Image.asset(
-          'assets/images/logo.png',
+          'assets/images/logo_1.png',
           width: 500,
           height: 500,
         ),

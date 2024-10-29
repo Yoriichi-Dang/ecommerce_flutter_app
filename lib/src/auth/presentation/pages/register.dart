@@ -3,7 +3,7 @@ import 'package:ecommerce_app/core/animation/page_transition.dart';
 import 'package:ecommerce_app/src/auth/presentation/pages/login.dart';
 import 'package:ecommerce_app/src/auth/presentation/widgets/button.dart';
 import 'package:ecommerce_app/src/auth/presentation/widgets/input_form.dart';
-import 'package:ecommerce_app/src/auth/presentation/widgets/layout/auth_layout.dart';
+import 'package:ecommerce_app/src/auth/presentation/widgets/layouts/auth_layout.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -14,7 +14,21 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AuthLayout(
@@ -23,58 +37,71 @@ class _RegisterPageState extends State<RegisterPage> {
         key: _formKey,
         child: Column(
           children: [
-            const InputForm(
-                validateText: 'Please enter a valid email',
-                pathIcon: 'assets/icons/email_icon.svg',
-                hintText: 'Email'),
-            const SizedBox(
-              height: 20,
+            InputForm(
+              pathIcon: "assets/icons/email_icon.svg",
+              hintText: "Email",
+              controller: _emailController,
+              validateText: 'Please enter valid email',
             ),
-            const InputForm(
-                validateText: 'Please enter a valid username',
-                pathIcon: 'assets/icons/user_icon.svg',
-                hintText: 'Username'),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
-            const InputForm(
-              validateText: 'Please enter a valid password',
-              pathIcon: 'assets/icons/lock_icon.svg',
-              hintText: 'Password',
+            InputForm(
+              pathIcon: "assets/icons/user_icon.svg",
+              hintText: "Username",
+              controller: _usernameController,
+              validateText: 'Please enter valid username',
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            InputForm(
+              pathIcon: "assets/icons/phone_icon.svg",
+              controller: _phoneController,
+              hintText: "Phone",
+              validateText: 'Please enter valid phone number',
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            InputForm(
+              pathIcon: "assets/icons/lock_icon.svg",
               isPassword: true,
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            Button(
-              title: 'Register',
-              onPress: () {
-                if (_formKey.currentState!.validate()) {
-                  print("Please enter a valid ");
-                }
-              },
-              width: double.infinity,
+              controller: _passwordController,
+              validateText: 'Please enter valid password',
+              hintText: "Password",
             ),
             const SizedBox(
               height: 30,
             ),
+            Button(
+              title: 'Login',
+              width: double.infinity,
+              onPress: () {
+                if (_formKey.currentState!.validate()) {
+                  print('hello');
+                }
+              },
+            ),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Already have an account?\t',
-                  style: TextStyle(color: Colors.grey.shade600),
+                  style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context, PageTransition.changeRoute(const LoginPage()));
+                    Navigator.of(context)
+                        .push(PageTransition.changeRoute(const LoginPage()));
                   },
-                  child: Text(
+                  child: const Text(
                     'Login',
                     style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.secondary_300),
+                        fontSize: 12,
+                        color: AppColors.brown_400,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ],

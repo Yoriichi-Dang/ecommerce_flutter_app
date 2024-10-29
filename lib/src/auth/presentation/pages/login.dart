@@ -3,7 +3,8 @@ import 'package:ecommerce_app/core/animation/page_transition.dart';
 import 'package:ecommerce_app/src/auth/presentation/pages/register.dart';
 import 'package:ecommerce_app/src/auth/presentation/widgets/button.dart';
 import 'package:ecommerce_app/src/auth/presentation/widgets/input_form.dart';
-import 'package:ecommerce_app/src/auth/presentation/widgets/layout/auth_layout.dart';
+import 'package:ecommerce_app/src/auth/presentation/widgets/layouts/auth_layout.dart';
+import 'package:ecommerce_app/src/root/presentation/pages/root.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,7 +15,16 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AuthLayout(
@@ -26,7 +36,8 @@ class _LoginPageState extends State<LoginPage> {
             InputForm(
               pathIcon: "assets/icons/email_icon.svg",
               hintText: "Email",
-              validateText: 'Please enter a valid email',
+              controller: _emailController,
+              validateText: 'Please enter valid email',
             ),
             const SizedBox(
               height: 10,
@@ -34,8 +45,9 @@ class _LoginPageState extends State<LoginPage> {
             InputForm(
               pathIcon: "assets/icons/lock_icon.svg",
               hintText: "Password",
+              controller: _passwordController,
+              validateText: 'Please enter valid password',
               isPassword: true,
-              validateText: 'Please enter a valid password',
             ),
             const SizedBox(
               height: 10,
@@ -61,7 +73,8 @@ class _LoginPageState extends State<LoginPage> {
               width: double.infinity,
               onPress: () {
                 if (_formKey.currentState!.validate()) {
-                  print('hello');
+                  Navigator.of(context)
+                      .push(PageTransition.changeRoute(const RootPage()));
                 }
               },
             ),
@@ -100,31 +113,30 @@ class _LoginPageState extends State<LoginPage> {
               width: double.infinity,
             ),
             const SizedBox(
-              height: 30,
+              height: 15,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Don\'t have an account?\t',
-                  style: TextStyle(color: Colors.grey.shade600, fontSize: 15),
+                  'Don"t have an account?\t',
+                  style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        PageTransition.changeRoute(const RegisterPage()));
+                    Navigator.of(context)
+                        .push(PageTransition.changeRoute(const RegisterPage()));
                   },
                   child: const Text(
                     'Register',
                     style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Roboto',
-                        color: AppColors.secondary_300),
+                        fontSize: 12,
+                        color: AppColors.brown_400,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
-            ),
+            )
           ],
         ),
       ),

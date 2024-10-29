@@ -4,12 +4,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class InputForm extends StatefulWidget {
   final String pathIcon;
-  final String hintText;
+  final String? typeInput;
+  final TextEditingController controller;
   final bool isPassword;
+  final String hintText;
   final String validateText;
   const InputForm(
       {super.key,
       required this.pathIcon,
+      this.typeInput = 'text',
+      required this.controller,
       required this.hintText,
       this.isPassword = false,
       required this.validateText});
@@ -19,7 +23,13 @@ class InputForm extends StatefulWidget {
 }
 
 class _InputFormState extends State<InputForm> {
-  bool showPassword = false;
+  bool _obscureText = true;
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,11 +45,14 @@ class _InputFormState extends State<InputForm> {
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return widget.validateText;
+                } else if (widget.typeInput == 'email' &&
+                    !value.contains('@')) {
+                  return 'Invalid email @';
                 }
                 return null;
               },
               cursorColor: AppColors.secondary_400,
-              obscureText: widget.isPassword & !showPassword,
+              obscureText: _obscureText & widget.isPassword,
               decoration: InputDecoration(
                 hintText: widget.hintText,
                 hintStyle: TextStyle(color: Colors.grey.shade700),
@@ -58,17 +71,13 @@ class _InputFormState extends State<InputForm> {
                 ),
                 suffixIcon: widget.isPassword
                     ? IconButton(
-                        onPressed: () {
-                          setState(() {
-                            showPassword = !showPassword;
-                          });
-                        },
                         icon: Icon(
-                          showPassword
+                          !_obscureText
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          color: AppColors.secondary_400,
+                          color: Colors.white, // Màu của icon
                         ),
+                        onPressed: _togglePasswordVisibility,
                       )
                     : null,
               ),
