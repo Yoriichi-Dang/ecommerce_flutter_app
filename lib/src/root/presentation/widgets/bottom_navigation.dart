@@ -44,12 +44,12 @@ class BottomNavigation extends StatelessWidget {
                   label: 'Cart',
                 ),
                 BottomNavigationBarItem(
-                  icon: SvgPicture.asset('assets/icons/chat_icon.svg',
+                  icon: SvgPicture.asset('assets/icons/heart_icon.svg',
                       width: 30,
                       color: selectedIndex == 2
                           ? Colors.white
                           : Colors.grey.shade600),
-                  label: 'Chat',
+                  label: 'Love',
                 ),
                 BottomNavigationBarItem(
                   icon: SvgPicture.asset('assets/icons/user_icon.svg',

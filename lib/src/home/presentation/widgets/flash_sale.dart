@@ -21,23 +21,32 @@ class _FlashSaleState extends State<FlashSale> {
   String hoursStr = "";
   String minutesStr = "";
   String secondsStr = "";
+  late CountdownTimer countdown;
   @override
   void initState() {
     super.initState();
-    CountdownTimer countdown = CountdownTimer(
+    countdown = CountdownTimer(
         hours: widget.hours, minutes: widget.minutes, seconds: widget.hours);
     countdown.start(
       (int hours, int minutes, int seconds) {
-        setState(() {
-          hoursStr = hours.toString();
-          minutesStr = minutes.toString();
-          secondsStr = seconds.toString();
-        });
+        if (mounted) {
+          setState(() {
+            hoursStr = hours.toString();
+            minutesStr = minutes.toString();
+            secondsStr = seconds.toString();
+          });
+        }
       },
       () {
         print("Đếm ngược hoàn tất!");
       },
     );
+  }
+
+  @override
+  void dispose() {
+    countdown.stop(); // Stop the timer
+    super.dispose();
   }
 
   @override
