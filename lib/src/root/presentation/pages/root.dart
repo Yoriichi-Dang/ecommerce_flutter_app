@@ -26,6 +26,7 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

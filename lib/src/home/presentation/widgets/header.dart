@@ -36,7 +36,7 @@ class Header extends StatelessWidget {
                 ),
                 Text(
                   location,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: AppColors.brown_300, fontWeight: FontWeight.w500),
                 )
               ],

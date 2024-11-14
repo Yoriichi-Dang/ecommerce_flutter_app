@@ -47,7 +47,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             children: [
               Container(
                 height: 300,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/products/product_2.jpg'),
                     fit: BoxFit.cover,
